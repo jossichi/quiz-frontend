@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'; // Removed useEffect
+import React, { useRef, useState } from 'react';
 import '../CSS/Quiz.css';
 import questionsData from '../../questions/questionsData.json';
 import Results from './Results';
@@ -40,9 +40,9 @@ function Quiz() {
       const storedUserInfo = JSON.parse(localStorage.getItem('userInfo')) || {};
       const formData = { ...storedUserInfo, score: score };
   
-      // Sử dụng biến môi trường
+      // Gửi dữ liệu đến API backend
       await axios.post(`${apiUrl}/submit`, formData);
-      console.log('Data successfully saved to Google Sheets');
+      console.log('Data successfully saved');
     } catch (error) {
       console.error('Error saving data:', error);
     }
