@@ -1,0 +1,73 @@
+[
+  {
+    "question": "VUCA là viết tắt của 4 đặc tính chung trong thế giới hiện đại: Volatility (Biến động), Uncertainty (Không chắc chắn), Complexity (Phức tạp), Ambiguity (Mơ hồ)",
+    "option1": "ĐÚNG",
+    "option2": "SAI",
+    "answer": "SAI",
+    "points": 10
+  },
+  {
+    "question": "Khởi nghiệp là gì ?",
+    "option1": "Start-up",
+    "option2": "Khởi đầu sự nghiệp",
+    "option3": "Cả hai đáp án",
+    "answer": "Cả hai đáp án",
+    "points": 10
+  },
+  {
+    "question": "Chúng ta trong thời buổi hiện tại nên chọn những ngành nghề hot trên thị trường để dễ thành công bền vững hơn",
+    "option1": "ĐÚNG",
+    "option2": "SAI",
+    "answer": "SAI",
+    "points": 10
+  },
+  {
+    "question": "Khám phá năng lực bản thân là một phần quan trọng trong quá trình phát triển sự nghiệp",
+    "option1": "ĐÚNG",
+    "option2": "SAI",
+    "answer": "ĐÚNG",
+    "points": 10
+  },
+  {
+    "question": "Thấu hiểu sở trường bản thân để định hướng sự nghiệp phù hợp hơn",
+    "option1": "ĐÚNG",
+    "option2": "SAI",
+    "answer": "ĐÚNG",
+    "points": 10
+  },
+  {
+    "question": "Tập trung phát triển đúng lĩnh vực sở trường của bản thân, thay vì dành nhiều thời gian để trải nghiệm nhiều lĩnh vực khác nhau",
+    "option1": "ĐÚNG",
+    "option2": "SAI",
+    "answer": "ĐÚNG",
+    "points": 10
+  },
+  {
+    "question": "Khi nhận thấy những dấu hiệu overthinking về sự không phù hợp đối với ngành mình theo đuổi, thì lập tức bỏ qua và gạt đi những suy nghĩ đó",
+    "option1": "NÊN",
+    "option2": "KHÔNG NÊN",
+    "answer": "KHÔNG NÊN",
+    "points": 10
+  },
+  {
+    "question": "Định hướng sự nghiệp cá nhân cần phải được điều chỉnh liên tục dựa trên hoàn cảnh thực tế",
+    "option1": "NÊN",
+    "option2": "KHÔNG NÊN",
+    "answer": "KHÔNG NÊN",
+    "points": 10
+  },
+  {
+    "question": "Dấn thân tham gia các dự án thực chiến câu lạc bộ hay chương trình thực tập sinh",
+    "option1": "NÊN",
+    "option2": "KHÔNG NÊN",
+    "answer": "NÊN",
+    "points": 10
+  },
+  {
+    "question": "Đối với sinh viên, nên tập trung phát triển hệ kiến thức và bộ kỹ năng chuyên môn của ngành nghề trước, rồi học các kỹ năng mềm sau.",
+    "option1": "NÊN",
+    "option2": "KHÔNG NÊN",
+    "answer": "KHÔNG NÊN",
+    "points": 10
+  }
+]
