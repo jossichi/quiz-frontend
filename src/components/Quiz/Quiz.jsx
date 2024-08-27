@@ -12,6 +12,7 @@ function Quiz() {
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [isFinalQuestion, setIsFinalQuestion] = useState(false);
   const question = questionsData[index];
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   const optionRefs = useRef([]);
 
@@ -40,7 +41,6 @@ function Quiz() {
       const formData = { ...storedUserInfo, score: score };
   
       // Sử dụng biến môi trường
-      const apiUrl = process.env.REACT_APP_API_URL;
       await axios.post(`${apiUrl}/submit`, formData);
       console.log('Data successfully saved to Google Sheets');
     } catch (error) {
