@@ -36,24 +36,18 @@ function Quiz() {
     setQuizCompleted(true);
   
     try {
-      // Retrieve user info from localStorage
       const storedUserInfo = JSON.parse(localStorage.getItem('userInfo')) || {};
+      const formData = { ...storedUserInfo, score: score };
   
-      // Create a formData object with user info and quiz score
-      const formData = {
-        ...storedUserInfo,
-        score: score
-      };
-  
-      // Send data to the server
-      await axios.post('http://localhost:3001/submit', formData);
+      // Sử dụng biến môi trường
+      const apiUrl = process.env.REACT_APP_API_URL;
+      await axios.post(`${apiUrl}/submit`, formData);
       console.log('Data successfully saved to Google Sheets');
     } catch (error) {
       console.error('Error saving data:', error);
     }
   };
   
-
   const checkAnswer = (e, ans) => {
     if (!lock) {
       const selectedOption = e.target;
