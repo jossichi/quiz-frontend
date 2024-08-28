@@ -10,6 +10,7 @@ function UserInfoForm() {
   const [email, setEmail] = useState('');
   const [school, setSchool] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -46,16 +47,20 @@ function UserInfoForm() {
     try {
       // Gửi dữ liệu tới backend
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/submit`, formData);
-      console.log('Data successfully saved:', response.data);
 
-      // Save user info to localStorage
-      localStorage.setItem('userInfo', JSON.stringify(formData));
-
-      // Redirect to quiz page
-      navigate('/quiz');
+      if (response.status === 200 && response.data.message === 'Data successfully saved') {
+        // Lưu thông tin vào localStorage và điều hướng nếu thành công
+        localStorage.setItem('userInfo', JSON.stringify(formData));
+        setSuccess(true);
+        setTimeout(() => {
+          navigate('/quiz');
+        }, 2000); // Delay 2 giây để người dùng thấy thông báo
+      } else {
+        setError('Không thể lưu dữ liệu, vui lòng thử lại.');
+      }
     } catch (error) {
       console.error('Error:', error);
-      setError('An error occurred while saving data.');
+      setError('Đã xảy ra lỗi khi lưu dữ liệu.');
     }
   };
 
@@ -109,6 +114,7 @@ function UserInfoForm() {
         <button type='submit' className='btnsubmit'>Submit</button>
       </form>
       {error && <p className='error'>{error}</p>}
+      {success && <div className='success-dialog'>Cảm ơn bạn đã tham gia!</div>}
     </div>
   );
 }
