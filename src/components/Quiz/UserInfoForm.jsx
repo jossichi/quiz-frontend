@@ -10,7 +10,7 @@ function UserInfoForm() {
   const [email, setEmail] = useState('');
   const [school, setSchool] = useState('');
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState('');
   const navigate = useNavigate();
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -19,23 +19,23 @@ function UserInfoForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validate data
+  
+    // Validate input
     if (dob.length !== 4 || isNaN(dob)) {
       setError('Năm sinh không hợp lệ.');
       return;
     }
-
+  
     if (!emailRegex.test(email)) {
       setError('Địa chỉ email không hợp lệ.');
       return;
     }
-
+  
     if (!phoneRegexLocal.test(phone) && !phoneRegexInternational.test(phone)) {
       setError('Số điện thoại không hợp lệ.');
       return;
     }
-
+    
     const formData = {
       name,
       dob,
@@ -43,27 +43,25 @@ function UserInfoForm() {
       email,
       school
     };
-
+  
     try {
-      // Gửi dữ liệu tới backend
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/submit`, formData);
-
-      if (response.status === 200 && response.data.message === 'Data successfully saved') {
-        // Lưu thông tin vào localStorage và điều hướng nếu thành công
+      
+      if (response.status === 200) {
+        setSuccess('Cảm ơn bạn đã tham gia');
         localStorage.setItem('userInfo', JSON.stringify(formData));
-        setSuccess(true);
         setTimeout(() => {
           navigate('/quiz');
-        }, 2000); // Delay 2 giây để người dùng thấy thông báo
+        }, 2000); // Redirect after 2 seconds to allow user to see the success message
       } else {
-        setError('Không thể lưu dữ liệu, vui lòng thử lại.');
+        throw new Error('Không thể lưu dữ liệu.');
       }
     } catch (error) {
-      console.error('Error:', error);
-      setError('Đã xảy ra lỗi khi lưu dữ liệu.');
+      console.error('Error saving data:', error);
+      setError(`Đã có lỗi khi hiển thị dữ liệu: ${error.response?.data.message || error.message}`);
     }
   };
-
+  
   return (
     <div className='container'>
       <h1>NHẬP THÔNG TIN</h1>
@@ -114,7 +112,7 @@ function UserInfoForm() {
         <button type='submit' className='btnsubmit'>Submit</button>
       </form>
       {error && <p className='error'>{error}</p>}
-      {success && <div className='success-dialog'>Cảm ơn bạn đã tham gia!</div>}
+      {success && <div className='success-dialog'>{success}</div>}
     </div>
   );
 }
