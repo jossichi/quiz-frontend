@@ -1,25 +1,25 @@
-# Use the official Node.js image.
+# Sử dụng Node.js phiên bản 18 để build ứng dụng React
 FROM node:18 AS build
 
-# Set working directory.
+# Thiết lập thư mục làm việc
 WORKDIR /app
 
-# Install dependencies.
+# Cài đặt dependencies
 COPY package.json package-lock.json ./
 RUN npm install
 
-# Copy application code.
+# Sao chép mã nguồn ứng dụng
 COPY . .
 
-# Build the app.
+# Build ứng dụng
 RUN npm run build
 
-# Use a minimal server image to serve the app.
+# Sử dụng Nginx để phục vụ ứng dụng
 FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Expose the port that Nginx is listening on.
+# Mở cổng 80 để Nginx có thể tiếp nhận kết nối từ bên ngoài
 EXPOSE 80
 
-# Start Nginx.
+# Khởi chạy Nginx
 CMD ["nginx", "-g", "daemon off;"]
