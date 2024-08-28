@@ -12,7 +12,6 @@ function Quiz() {
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [isFinalQuestion, setIsFinalQuestion] = useState(false);
   const question = questionsData[index];
-  const apiUrl = process.env.REACT_APP_API_URL;
 
   const optionRefs = useRef([]);
 
