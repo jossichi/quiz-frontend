@@ -19,23 +19,23 @@ function UserInfoForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     // Validate input
     if (dob.length !== 4 || isNaN(dob)) {
       setError('Năm sinh không hợp lệ.');
       return;
     }
-  
+
     if (!emailRegex.test(email)) {
       setError('Địa chỉ email không hợp lệ.');
       return;
     }
-  
+
     if (!phoneRegexLocal.test(phone) && !phoneRegexInternational.test(phone)) {
       setError('Số điện thoại không hợp lệ.');
       return;
     }
-    
+
     const formData = {
       name,
       dob,
@@ -43,16 +43,19 @@ function UserInfoForm() {
       email,
       school
     };
-  
+
     try {
+      // Log the URL being used
+      console.log(`Posting to URL: ${process.env.REACT_APP_API_URL}/submit`);
+
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/submit`, formData);
-      
+
       if (response.status === 200) {
         setSuccess('Cảm ơn bạn đã tham gia');
         localStorage.setItem('userInfo', JSON.stringify(formData));
         setTimeout(() => {
           navigate('/quiz');
-        }, 2000); // Redirect after 2 seconds to allow user to see the success message
+        }, 2000); // Redirect after 2 seconds
       } else {
         throw new Error('Không thể lưu dữ liệu.');
       }
@@ -61,7 +64,7 @@ function UserInfoForm() {
       setError(`Đã có lỗi khi hiển thị dữ liệu: ${error.response?.data.message || error.message}`);
     }
   };
-  
+
   return (
     <div className='container'>
       <h1>NHẬP THÔNG TIN</h1>
