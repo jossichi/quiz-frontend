@@ -15,24 +15,24 @@ function UserInfoForm() {
   const phoneRegexLocal = /^0\d{9}$/;     
   const phoneRegexInternational = /^\+84\d{9}$/; 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (dob.length !== 4 || isNaN(dob)) {
       setError('Năm sinh không hợp lệ.');
       return;
     }
-
+  
     if (!emailRegex.test(email)) {
       setError('Địa chỉ email không hợp lệ.');
       return;
     }
-
+  
     if (!phoneRegexLocal.test(phone) && !phoneRegexInternational.test(phone)) {
       setError('Số điện thoại không hợp lệ.');
       return;
     }
-    
+  
     try {
       const formData = {
         name,
@@ -41,17 +41,21 @@ function UserInfoForm() {
         email,
         school
       };
-
-      // Save user info to localStorage
+  
+      // Lưu thông tin người dùng vào localStorage
       localStorage.setItem('userInfo', JSON.stringify(formData));
       
-      // Redirect to quiz page
+      // Gửi dữ liệu đến backend
+      await axios.post('https://my-node-backend-production.up.railway.app/submit', formData);
+      
+      // Chuyển hướng đến trang quiz
       navigate('/quiz');
     } catch (error) {
       console.error('Error:', error);
       setError('An error occurred while saving data.');
     }
   };
+  
 
   return (
     <div className='container'>
