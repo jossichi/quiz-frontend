@@ -52,6 +52,6 @@
   }
   
   .container .wrong {
-    background: #dffff2;
-    border-color: #ff4a4a;
+    background: #ec5e5eaf;
+    border:  2px solid #ff4a4a;
   }
