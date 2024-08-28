@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../CSS/UserInfoForm.css';
+import axios from 'axios';
 
 function UserInfoForm() {
   const [name, setName] = useState('');
@@ -17,22 +18,22 @@ function UserInfoForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (dob.length !== 4 || isNaN(dob)) {
       setError('Năm sinh không hợp lệ.');
       return;
     }
-  
+
     if (!emailRegex.test(email)) {
       setError('Địa chỉ email không hợp lệ.');
       return;
     }
-  
+
     if (!phoneRegexLocal.test(phone) && !phoneRegexInternational.test(phone)) {
       setError('Số điện thoại không hợp lệ.');
       return;
     }
-  
+    
     try {
       const formData = {
         name,
@@ -41,21 +42,20 @@ function UserInfoForm() {
         email,
         school
       };
-  
-      // Lưu thông tin người dùng vào localStorage
+
+      // Gửi dữ liệu tới backend
+      await axios.post(`${process.env.REACT_APP_API_URL}/submit`, formData);
+      
+      // Save user info to localStorage
       localStorage.setItem('userInfo', JSON.stringify(formData));
       
-      // Gửi dữ liệu đến backend
-      await axios.post('https://my-node-backend-production.up.railway.app/submit', formData);
-      
-      // Chuyển hướng đến trang quiz
+      // Redirect to quiz page
       navigate('/quiz');
     } catch (error) {
       console.error('Error:', error);
       setError('An error occurred while saving data.');
     }
   };
-  
 
   return (
     <div className='container'>
