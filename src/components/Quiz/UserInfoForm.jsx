@@ -19,6 +19,7 @@ function UserInfoForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validate data
     if (dob.length !== 4 || isNaN(dob)) {
       setError('Năm sinh không hợp lệ.');
       return;
@@ -33,22 +34,23 @@ function UserInfoForm() {
       setError('Số điện thoại không hợp lệ.');
       return;
     }
-    
-    try {
-      const formData = {
-        name,
-        dob,
-        phone,
-        email,
-        school
-      };
 
+    const formData = {
+      name,
+      dob,
+      phone,
+      email,
+      school
+    };
+
+    try {
       // Gửi dữ liệu tới backend
-      await axios.post(`${process.env.REACT_APP_API_URL}/submit`, formData);
-      
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/submit`, formData);
+      console.log('Data successfully saved:', response.data);
+
       // Save user info to localStorage
       localStorage.setItem('userInfo', JSON.stringify(formData));
-      
+
       // Redirect to quiz page
       navigate('/quiz');
     } catch (error) {
